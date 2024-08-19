@@ -263,9 +263,19 @@ img {
 }
 
 .section__img {
-  width: 285px;
+  width: 100px;
+  height: 230px; 
   border-radius: .5rem;
+  margin: 4px
 }
+.section__caption {
+  margin-top: 8px;
+  transform: translateX(10px); /* Menggeser teks ke kanan dengan transform */
+  font-size: 14px;
+  color: black;
+  text-align: center;
+}
+
 
 /*===== MEDIA QUERIES =====*/
 @media screen and (min-width: 760px) {
