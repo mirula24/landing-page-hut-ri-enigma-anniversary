@@ -40,3 +40,74 @@ sr.reveal('.section__data',{origin: 'left',distance: '70px'});
 
 /*Imgs*/
 sr.reveal('.section__img',{origin: 'left',distance: '90px',delay: 200}); 
+document.addEventListener('DOMContentLoaded', function() {
+    const testimonialsContainer = document.getElementById('testimonials');
+    const addTestimonialForm = document.getElementById('addTestimonialForm');
+  
+    // Function to fetch existing testimonials and display them
+    function fetchAndDisplayTestimonials() {
+      fetch('testimonials.json')
+        .then(response => response.json())
+        .then(data => {
+          testimonialsContainer.innerHTML = ''; // Clear existing testimonials
+          data.forEach(testimonial => {
+            displayTestimonial(testimonial);
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching testimonials:', error);
+        });
+    }
+  
+    // Function to display a single testimonial
+    function displayTestimonial(testimonial) {
+      const testimonialElement = document.createElement('div');
+      testimonialElement.classList.add('testimonial');
+      testimonialElement.innerHTML = `
+        <div class="testimonial-content">
+          <p>${testimonial.testimonial}</p>
+          <cite>${testimonial.name}</cite>
+          <span>${testimonial.position}</span>
+        </div>
+      `;
+      testimonialsContainer.appendChild(testimonialElement);
+    }
+  
+    // Event listener for form submission
+    addTestimonialForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('name').value;
+      const position = document.getElementById('position').value;
+      const testimonialText = document.getElementById('testimonial').value;
+  
+      // Create new testimonial object
+      const newTestimonial = {
+        name: name,
+        position: position,
+        testimonial: testimonialText
+      };
+  
+      // Post new testimonial (For simulation, in real application, should use backend/API)
+      fetch('testimonials.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newTestimonial),
+      })
+      .then(response => response.json())
+      .then(data => {
+        displayTestimonial(newTestimonial); // Display new testimonial immediately
+        addTestimonialForm.reset(); // Clear form fields
+      })
+      .catch(error => {
+        console.error('Error adding testimonial:', error);
+      });
+    });
+  
+    // Initial load of testimonials
+    fetchAndDisplayTestimonials();
+  });
+  
