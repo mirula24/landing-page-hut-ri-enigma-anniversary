@@ -227,7 +227,7 @@ img {
 
 /*===== SECTION =====*/
 .l-section {
-  background-color: var(--dark-color);
+  background-color: white;
 }
 
 .section {
@@ -258,7 +258,7 @@ img {
 
 .section__title {
   font-size: var(--h2-font-size);
-  color: var(--first-color);
+  color: red;
   margin-bottom: 1rem;
 }
 
@@ -300,6 +300,7 @@ img {
   }
   .section__text {
     padding-right: 4rem;
+    color: black;
   }
   .section__img {
     width: 470px;
